@@ -17,7 +17,8 @@
         android:maxLines="1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="Course Name"/>
 
     <Spinner
         android:id="@+id/spinner_day"
@@ -55,7 +56,8 @@
             android:id="@+id/tv_start_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/textPrimary"/>
+            android:textColor="@color/textPrimary"
+            android:hint="Start Time"/>
     </LinearLayout>
 
     <LinearLayout
@@ -80,7 +82,8 @@
             android:id="@+id/tv_end_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/textPrimary"/>
+            android:textColor="@color/textPrimary"
+            android:hint="End Time"/>
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputEditText
@@ -94,7 +97,8 @@
         android:maxLines="1"
         app:layout_constraintTop_toBottomOf="@+id/start_time_layout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="Lecturer"/>
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/ed_note"
@@ -107,6 +111,7 @@
         android:lines="4"
         app:layout_constraintTop_toBottomOf="@+id/ed_lecturer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="Note"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

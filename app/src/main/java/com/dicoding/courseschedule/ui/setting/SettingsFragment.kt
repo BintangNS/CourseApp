@@ -2,6 +2,8 @@ package com.dicoding.courseschedule.ui.setting
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.ListPreference
@@ -19,7 +21,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         Log.d("SettingsFragment", "onCreatePreferences called") // logging for testing
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
-        val themePreference = findPreference<ListPreference>("pref_key_theme")
+        val themePreference = findPreference<ListPreference>("key_dark_mode")
         themePreference?.setOnPreferenceChangeListener { _, newValue ->
             val nightMode = when (newValue) {
                 NightMode.ON.name -> NightMode.ON.value
@@ -30,24 +32,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
-        val notificationsPreference =
-            findPreference<SwitchPreference>("key_notification")
+        val notificationsPreference = findPreference<SwitchPreference>("key_notification")
         Log.d("SettingsFragment", "notificationsPreference: $notificationsPreference")
         notificationsPreference?.setOnPreferenceChangeListener { _, newValue ->
-            val intent = Intent(requireContext(), DailyReminder::class.java)
-            if (newValue as Boolean) {
-                Log.d("SettingsFragment", "Switch turned on")
-                dailyReminder.setDailyReminder(requireContext())
-            } else {
+            if (!(newValue as Boolean)) {
+                Log.d("SettingsFragment", "Switch turned off")
                 dailyReminder.cancelAlarm(requireContext())
             }
             true
         }
     }
 
-    private fun updateTheme(nightMode: Int): Boolean {
-        AppCompatDelegate.setDefaultNightMode(nightMode)
-        requireActivity().recreate()
-        return true
+    private fun updateTheme(nightMode: Int) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (isAdded) {
+                AppCompatDelegate.setDefaultNightMode(nightMode)
+                requireActivity().recreate()
+            }
+        }, 200)
     }
 }

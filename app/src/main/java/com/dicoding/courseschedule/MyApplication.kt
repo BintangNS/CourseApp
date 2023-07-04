@@ -3,6 +3,7 @@ package com.dicoding.courseschedule
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
+import com.dicoding.courseschedule.notification.DailyReminder
 import com.dicoding.courseschedule.util.NightMode
 import java.util.*
 
@@ -18,6 +19,10 @@ class MyApplication : Application() {
         )?.apply {
             val mode = NightMode.valueOf(this.uppercase(Locale.US))
             AppCompatDelegate.setDefaultNightMode(mode.value)
+        }
+        val notificationEnabled = preferences.getBoolean("key_notification", false)
+        if(notificationEnabled) {
+            DailyReminder().setDailyReminder(applicationContext)
         }
     }
 }

@@ -71,7 +71,7 @@ class HomeActivity : AppCompatActivity() {
                 else -> QueryType.CURRENT_DAY
             }
             viewModel.setQueryType(newQueryType)
-            viewModel.refreshCourse()  // Add this line
+            viewModel.refreshCourse()
             queryType = newQueryType
         }
     }

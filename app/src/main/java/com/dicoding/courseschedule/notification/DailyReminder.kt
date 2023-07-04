@@ -37,6 +37,9 @@ class DailyReminder : BroadcastReceiver() {
                     }
                     Log.d("Notif", "Kosong gan notifnya")
                 }
+
+                // Set a new alarm after this one has been triggered
+                setDailyReminder(context)
             }
         }
     }
@@ -118,7 +121,7 @@ class DailyReminder : BroadcastReceiver() {
         val builder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notifications)
             .setContentTitle(context.getString(R.string.today_schedule))
-            .setContentText(context.getString(R.string.time_format))
+            .setContentText(context.getString(R.string.notification_message_format))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
             .setStyle(notificationStyle)

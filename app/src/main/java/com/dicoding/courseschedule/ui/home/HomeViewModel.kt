@@ -13,7 +13,6 @@ class HomeViewModel(private val repository: DataRepository) : ViewModel() {
     private val _queryType = MutableLiveData(QueryType.CURRENT_DAY)
     val queryType: LiveData<QueryType> = _queryType
 
-    // Add the course LiveData
     val course: LiveData<Course?> = Transformations.switchMap(_queryType) { queryType ->
         when(queryType) {
             QueryType.CURRENT_DAY -> repository.getNearestSchedule(QueryType.CURRENT_DAY)
